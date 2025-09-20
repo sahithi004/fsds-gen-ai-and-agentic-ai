@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Mark Predictor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(120deg, #89f7fe, #66a6ff);
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+    .card {
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    h1 {
+      color: #004aad;
+      font-weight: bold;
+    }
+    .slider-value {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #004aad;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Banner -->
+  <div class="container-fluid p-0">
+    <img src="static/images/college_banner2.png" alt="College Banner" class="img-fluid w-100">
+  </div>
+
+  <!-- Card Section -->
+  <div class="container mt-5 d-flex justify-content-center">
+    <div class="card p-5 col-md-6">
+      <h1 class="text-center mb-4">📘 Student Mark Predictor</h1>
+      <form action="{{ url_for('predict')}}" method="post">
+        
+        <!-- Slider for study hours -->
+        <label for="study_hours" class="form-label">Enter Study Hours:</label>
+        <input type="range" class="form-range" min="1" max="12" step="1" id="study_hours" name="study_hours" oninput="updateValue(this.value)" required>
+        
+        <p class="text-center">⏳ Study Hours: <span class="slider-value" id="slider_val">6</span></p>
+
+        <!-- Predict button -->
+        <div class="text-center">
+          <button type="submit" class="btn btn-lg btn-success px-5 mt-3">🎯 Predict Marks</button>
+        </div>
+      </form>
+
+      <!-- Show prediction -->
+      <div class="mt-4 text-center">
+        <h3 id="output">📊 {{ prediction_text }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function updateValue(val) {
+      document.getElementById("slider_val").innerText = val;
+    }
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
